@@ -66,6 +66,15 @@ Study the starter code for the web service provided. In which a sample web serve
 ## **Task 2**: Creating the database using ORM/Query builder
 Using the ERD provided above create the database using an ORM/Query builder. Throughout this assessment you are required to use only the ORM/Query builder to interact with the database and the tables inside of it. Add this code to the web server started code provided.
 
+## ```Postgres Credentials```
+Postgres credentials are provided via enviornment variables.
+```
+- host:- process.env.POSTGRES_HOST
+- username:- process.env.POSTGRES_USERNAME
+- password:- process.env.POSTGRES_PASSWORD
+- database:- process.env.POSTGRES_DATABASE 
+```
+
 ## **Task 3**: Adding routes/endpoints
 For the tables in the database you are to create separate API group(s). In each API group you will have the following category of endpoint with the described funcitonality:
 - POST - add data to the corresponding database table, data has to be passed as a raw request in JSON.
