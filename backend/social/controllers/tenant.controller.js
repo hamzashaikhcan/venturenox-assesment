@@ -64,60 +64,92 @@ const validateUser = (user) => {
 
 router.post('/', async (req, res) => {
 
-	if (validateUser(req.body)) {
-		tenants.create(req.body).then((social) => {
-			res.json(social[0]);
-		});
-	} else {
-		res.status(401).json({
-			code: 'error',
-			message: 'Invalid social'
-		});
+	try{
+		if (validateUser(req.body)) {
+			tenants.create(req.body).then((social) => {
+				res.json(social[0]);
+			});
+		} else {
+			res.status(401).json({
+				code: 'error',
+				message: 'Invalid social'
+			});
+		}
+	}
+	catch(err){
+		return err;
 	}
 
 });
 
 router.get('/', async (req, res) => {
 
-	tenants.getAll().then((result) => {
-		res.json(result);
-	});
+	try{
+		tenants.getAll().then((result) => {
+			res.json(result);
+		});
+	}
+	catch(err){
+		return err;
+	}
     
 });
 
 router.get('/tenants', async (req, res) => {
 
-	tenants.getAll().then((result) => {
-		res.json(result);
-	});
+	try{
+		tenants.getAll().then((result) => {
+			res.json(result);
+		});
+	}
+	catch(err){
+		return err;
+	}
     
 });
 
 router.get('/:id', isValidId, async (req, res) => {
 
-	tenants.getOne(req.params.id).then((social) => {
-		res.json(social);
-	});
+	try{
+		tenants.getOne(req.params.id).then((social) => {
+			res.json(social);
+		});
+	}
+	catch(err){
+		return err;
+	}
 
 });
 
 router.delete('/:id', isValidId, async (req, res) => {
 
-	tenants.delete(req.params.id).then(() => {
-		res.json({ deleted: true });
-	});
+	try{
+		tenants.delete(req.params.id).then(() => {
+			res.json({ deleted: true });
+		});
+	}
+	catch(err){
+		return err;
+	}
 
 });
 
 router.patch('/:id', isValidId, async (req, res) => {
 
-	if (validateUser(req.body)) {
-		tenants.update(req.params.id, req.body).then((social) => {
-			res.json(social[0]);
-		});
-	} else {
-		// eslint-disable-next-line no-undef
-		next(new Error('Invalid social'));
+	try{
+		if (validateUser(req.body)) {
+			tenants.update(req.params.id, req.body).then((social) => {
+				res.json(social[0]);
+			});
+		} else {
+			res.status().json({
+				code: 'fail',
+				message: 'Invalid social'
+			});
+		}
+	}
+	catch(err){
+		return err;
 	}
 
 });

@@ -10,7 +10,7 @@ const initProducer = async () => {
 
 	const kafka = new Kafka({
 		clientId: 'social',
-		brokers: ['hamza:9092']
+		brokers: ['kafka:9092']
 	});
 
 	const admin = kafka.admin();

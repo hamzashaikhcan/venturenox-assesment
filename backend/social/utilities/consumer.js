@@ -9,7 +9,7 @@ const initConsumer = async () => {
 
 	const kafka = new Kafka({
 		clientId: 'social',
-		brokers: ['hamza:9092']
+		brokers: ['kafka:9092']
 	});
 
 	const consumer = kafka.consumer({ groupId: 'social-consumer' });

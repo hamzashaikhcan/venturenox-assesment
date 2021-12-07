@@ -52,14 +52,22 @@ const validateUser = (user) => {
 
 router.post('/', async (req, res) => {
 
-	if (validateUser(req.body)) {
-		users.create(req.body).then((user) => {
-			res.json(user[0]);
-		});
-	} else {
-		res.status(401).json({
-			code: 'error',
-			message: 'Invalid request'
+	try{
+		if (validateUser(req.body)) {
+			users.create(req.body).then((user) => {
+				res.json(user[0]);
+			});
+		} else {
+			res.status(401).json({
+				code: 'error',
+				message: 'Invalid request'
+			});
+		}
+	}
+	catch (err){
+		res.status(400).json({
+			code: 'fail',
+			message: err
 		});
 	}
 
@@ -67,39 +75,71 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
 
-	users.getUsers().then((result) => {
-		res.json(result);
-	});
+	try{
+		users.getUsers().then((result) => {
+			res.json(result);
+		});
+	}
+	catch (err){
+		res.status(400).json({
+			code: 'fail',
+			message: err
+		});
+	}
     
 });
 
 router.get('/:id', isValidId, async (req, res) => {
 
-	users.getOne(req.params.id).then((user) => {
-		res.json(user);
-	});
+	try{
+		users.getOne(req.params.id).then((user) => {
+			res.json(user);
+		});
+	}
+	catch (err){
+		res.status(400).json({
+			code: 'fail',
+			message: err
+		});
+	}
 
 });
 
 router.delete('/:id', isValidId, async (req, res) => {
 
-	users.delete(req.params.id).then(() => {
-		res.json({ deleted: true });
-	});
+	try{
+		users.delete(req.params.id).then(() => {
+			res.json({ deleted: true });
+		});
+	}
+	catch (err){
+		res.status(400).json({
+			code: 'fail',
+			message: err
+		});
+	}
 
 });
 
 router.patch('/:id', isValidId, async (req, res) => {
 
-	if (validateUser(req.body)) {
-		users.update(req.params.id, req.body).then((user) => {
-			res.json(user[0]);
+	try{
+		if (validateUser(req.body)) {
+			users.update(req.params.id, req.body).then((user) => {
+				res.json(user[0]);
+			});
+		} else {
+			res.status(400).json({
+				code: 'fail',
+				message: 'Invalid request'
+			});
+		}
+	}
+	catch (err){
+		res.status(400).json({
+			code: 'fail',
+			message: err
 		});
-	} else {
-        res.status(400).json({
-            code: 'fail',
-            message: 'Invalid request'
-        });
 	}
 
 });

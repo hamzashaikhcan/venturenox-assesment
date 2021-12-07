@@ -2,22 +2,52 @@ const knex = require('./knex');
 
 module.exports = {
 	getAll() {
-		return knex('user_profiles').join('tenant_profile', 'tenant_profile.id', 'user_profiles.tenant_id').select('*');
+		try{
+			return knex('user_profiles').join('tenant_profile', 'tenant_profile.id', 'user_profiles.tenant_id').select('*');
+		}
+		catch(err){
+			return err;
+		}
 	},
 	getUsers() {
-		return knex('user_profiles');
+		try{
+			return knex('user_profiles');
+		}
+		catch(err){
+			return err;
+		}
 	},
 	getOne(id) {
-		return knex('user_profiles').where('id', id).first();
+		try{
+			return knex('user_profiles').where('id', id).first();
+		}
+		catch(err){
+
+		}
 	},
 	create(user_profiles) {
-		return knex('user_profiles').insert(user_profiles, '*');
+		try{
+			return knex('user_profiles').insert(user_profiles, '*');
+		}
+		catch(err){
+			return err;
+		}
 	},
 	update(id, user_profiles) {
-		return knex('user_profiles').where('id', id).update(user_profiles, '*');
+		try{
+			return knex('user_profiles').where('id', id).update(user_profiles, '*');
+		}
+		catch(err){
+			return err;
+		}
 	},
 	delete(id) {
-		return knex('user_profiles').where('id', id).del();
+		try{
+			return knex('user_profiles').where('id', id).del();
+		}
+		catch(err){
+			return err;
+		}
 	},
 };
   
