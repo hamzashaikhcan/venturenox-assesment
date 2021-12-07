@@ -3,7 +3,8 @@
 const USERNAME = 'postgres';
 const PASSWORD = 'postgres';
 const DB_NAME = 'social';
-const HOST = 'localhost';
+const HOST = 'postgres';
+// const HOST = 'localhost';
 
 const DIRECTORY = 'migrations';
 
